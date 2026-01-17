@@ -1,14 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { PhotoGallery } from "@/components/photo-gallery"
-import { UploadForm } from "@/components/upload-form"
 import { Button } from "@/components/ui/button"
-import { ImagePlus, RotateCw } from "lucide-react"
+import { ImagePlus, Images, RotateCw } from "lucide-react"
 
-export default function HomePage() {
+export default function GalleryPage() {
   const [refresh, setRefresh] = useState(0)
-  const [showUpload, setShowUpload] = useState(false)
 
   return (
     <main className="min-h-screen bg-background">
@@ -17,10 +16,18 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold">Fotogallerij</h1>
           <nav className="flex gap-2">
-            <Button variant={showUpload ? "default" : "outline"} size="sm" onClick={() => setShowUpload(!showUpload)}>
-              <ImagePlus className="size-4" />
-              Upload
-            </Button>
+            <Link href="/">
+              <Button variant="outline" size="sm">
+                <ImagePlus className="size-4" />
+                Upload
+              </Button>
+            </Link>
+            <Link href="/gallery">
+              <Button variant="default" size="sm">
+                <Images className="size-4" />
+                Gallerij
+              </Button>
+            </Link>
             <Button variant="ghost" size="sm" onClick={() => setRefresh(refresh + 1)}>
               <RotateCw className="size-4" />
             </Button>
@@ -30,22 +37,10 @@ export default function HomePage() {
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
-        {showUpload && (
-          <div className="mb-8 p-6 border rounded-lg bg-muted/50">
-            <h2 className="text-2xl font-bold mb-4">Foto uploaden</h2>
-            <UploadForm
-              onSuccess={() => {
-                setRefresh(refresh + 1)
-                setShowUpload(false)
-              }}
-            />
-          </div>
-        )}
-
         <div className="flex flex-col gap-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold mb-2">Foto Collectie</h2>
-            <p className="text-muted-foreground">Nieuwste fotos eerst - hover om link te kopiëren</p>
+            <p className="text-muted-foreground">Nieuwste fotos eerst</p>
           </div>
           <PhotoGallery refresh={refresh} />
         </div>
