@@ -16,7 +16,8 @@ export function PhotoGallery({ refresh }: { refresh: number }) {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
-  const { success, error, info } = useToast();
+  const { success } = useToast();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
     loadPhotos();
@@ -35,10 +36,10 @@ export function PhotoGallery({ refresh }: { refresh: number }) {
 
   const handleCopyLink = async (fullUrl: string) => {
     try {
-      await navigator.clipboard.writeText(`http://localhost:3000${fullUrl}`);
+      await navigator.clipboard.writeText(`${baseUrl}${fullUrl}`);
       setCopiedUrl(fullUrl);
       success("Link gekopieerd naar clipboard! 🎉");
-        setTimeout(() => setCopiedUrl(null), 2000);
+      setTimeout(() => setCopiedUrl(null), 2000);
     } catch (err) {
       console.error("Kopiëren naar clipboard mislukt:", err);
     }
