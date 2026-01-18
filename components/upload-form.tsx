@@ -50,7 +50,6 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
     const result = await uploadPhoto(formData);
 
     if (result.success) {
-      onSuccess;
       if (inputRef.current) inputRef.current.value = "";
       onSuccess();
       success("Foto succesvol geüpload! ✨");
