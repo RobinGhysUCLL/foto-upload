@@ -76,7 +76,7 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
         <input
           ref={inputRef}
           type="file"
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/jpeg,image/png,image/webp,image/gif"
           onChange={handleFileSelect}
           disabled={isLoading}
           className="hidden"
@@ -90,7 +90,7 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
             Sleep foto hier of klik
           </h3>
           <p className="text-sm text-muted-foreground">
-            JPG, PNG of WebP tot 5MB
+            JPG, PNG, WebP of GIF tot 500MB
           </p>
         </div>
       </div>

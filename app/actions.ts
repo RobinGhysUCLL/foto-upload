@@ -6,7 +6,7 @@ import { existsSync } from "fs"
 
 const UPLOAD_DIR = join(process.cwd(), "public", "uploads")
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"]
-const MAX_SIZE = 5 * 1024 * 1024 // 5MB
+const MAX_SIZE = 500 * 1024 * 1024 // 5MB
 
 export async function uploadPhoto(formData: FormData) {
   try {
@@ -18,12 +18,12 @@ export async function uploadPhoto(formData: FormData) {
 
     // Valideer bestandstype
     if (!ALLOWED_TYPES.includes(file.type)) {
-      return { error: "Alleen JPG, PNG en WebP zijn toegestaan" }
+      return { error: "Alleen JPG, PNG, WebP en GIF zijn toegestaan" }
     }
 
     // Valideer bestandsgrootte
     if (file.size > MAX_SIZE) {
-      return { error: "Bestand is te groot (max 5MB)" }
+      return { error: "Bestand is te groot (max 500MB)" }
     }
 
     // Maak uploads directory aan als deze niet bestaat
@@ -58,7 +58,7 @@ export async function getPhotos() {
     const files = await readdir(UPLOAD_DIR)
     const photos = await Promise.all(
       files
-        .filter((f) => ["jpg", "jpeg", "png", "webp"].includes(f.split(".").pop()?.toLowerCase() || ""))
+        .filter((f) => ["jpg", "jpeg", "png", "webp", "gif"].includes(f.split(".").pop()?.toLowerCase() || ""))
         .map(async (filename) => {
           const filepath = join(UPLOAD_DIR, filename)
           const stats = await stat(filepath)
