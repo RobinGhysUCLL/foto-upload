@@ -18,6 +18,7 @@ export async function GET(
         jpeg: "image/jpeg",
         png: "image/png",
         webp: "image/webp",
+        gif: "image/gif",
       }[ext || ""] || "application/octet-stream";
 
     return new NextResponse(file, {
