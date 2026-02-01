@@ -5,8 +5,8 @@ import { join } from "path"
 import { existsSync } from "fs"
 
 const UPLOAD_DIR = join(process.cwd(), "public", "uploads")
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"]
-const MAX_SIZE = 500 * 1024 * 1024 // 5MB
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"]
+const MAX_SIZE = 500 * 1024 * 1024 // 500MB
 
 export async function uploadPhoto(formData: FormData) {
   try {
